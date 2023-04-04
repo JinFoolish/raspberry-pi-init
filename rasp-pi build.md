@@ -49,6 +49,27 @@ Esc退出编辑模式，输入`:wq`保存内容并退出
 于是执行`systemctl restart systemd-resolved.service` 后可以连接互联网
 > 若是重启机器后又ping不通，将该命令加入开机启动项（应该不会遇到）
 
+## apt换源
+
+- `cd /etc/apt/`
+- 备份默认源文件 `cp sources.list sources.list_bak`
+- 编辑配置源文件 `vim sources.list`
+
+阿里云源如下
+
+```shell
+deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+```
+
 ## 使用Zsh :fa-coffee: 让命令行更舒适
 
 ### 安装Zsh
