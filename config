@@ -1,0 +1,218 @@
+# Should you change your keyboard layout some time, delete
+# this file and re-run i3-config-wizard(1).
+#
+
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod4
+# set $mod Mod4
+
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:monospace 10
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec terminator
+
+# kill focused window
+# bindsym $mod+Shift+q kill
+bindsym $mod+x kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+bindsym $mod+Shift+D exec gksudo dmenu_run
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation 水平
+# bindsym $mod+h split h
+bindsym $mod+u split h
+
+# split in vertical orientation 垂直
+bindsym $mod+i split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+bindsym $mod+m fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# # Workspace names
+# workspace 1:一般 output LVDS1
+# workspace 2:网络 output LVDS1
+# workspace 3:配置 output LVDS1
+# workspace 4:其它 output LVDS1
+
+# # switch to workspace
+bindsym $mod+1 workspace 1:一般
+bindsym $mod+2 workspace 2:网络
+bindsym $mod+3 workspace 3:配置
+bindsym $mod+4 workspace 4:其它
+
+# # move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1:一般
+bindsym $mod+Shift+2 move container to workspace 2:网络
+bindsym $mod+Shift+3 move container to workspace 3:配置
+bindsym $mod+Shift+4 move container to workspace 4:其它
+
+# assign
+assign [class="Emacs"] 2:网络
+assign [class="Firefox"] 2:网络
+assign [class="Iceweasel"] 2:网络
+assign [class="chromium"] 2:网络
+assign [class="google-chrome"] 2:网络
+assign [class="aptitude"] 3:配置
+assign [class="[I|i]cedove"] 4:其它
+assign [class="synaptic"] 3:配置
+# assign [class="aptitude"] 3:配置
+
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+q exec "i3-msg exit"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym l resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym h resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Right resize shrink width 10 px or 10 ppt
+        bindsym Up resize grow height 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
+        bindsym Left resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	status_command    i3status
+		position          bottom
+		separator_symbol " | "
+		# colors {
+		# 	background #333333
+		# 		statusline #dedede
+		# 		separator #2d2d2d
+		# 		focused_workspace #636e88 #666666 #dedfdg
+		# 		active_workspace #333333 #333333 #56ef67
+		# 		inactive_workspace #636d72 #2d2d2d #dedede
+		# 		urgent_workspace #ffffff #900000 #d23d32
+		# }
+}
+# 10分钟后关闭显示器
+exec --no-startup-id xset dpms 600
+
+# 切换窗口边框
+bindsym $mod+t border normal
+bindsym $mod+y border pixel 1
+# bindsym $mod+y border 1pixel
+# bindsym $mod+u border none
+# border pixel 1
+new_window pixel 1
+
+
+# # 暂存器，还没有怎么用过
+# # Mark a container with a single character
+# bindsym $mod+m exec i3-input -f pango:mono -F 'mark %s' -l 1 -P 'Mark: '
+
+# # Go to the container marked
+# bindsym $mod+n exec i3-input -f pango:mono -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+
+# 窗口排列策略1
+default_orientation auto
+
+# 窗口排列策略2
+# workspace_layout tabbed
+
+# 默认焦点窗口颜色
+# class                 border  backgr. text    indicator child_border
+client.focused          #ffffff #4b4f4f #FFFFFF #333333 #4b4f4f
+# client.focused          #ffffff #4b4f4f #FFFFFF #2e9ef4 #4b4f4f
+client.focused_inactive #272f2f #272f2f #ffffff #484e50 #5f676a
+client.unfocused        #333333 #000000 #FFFFFF #292d2e #222222
+
+
+# give the focused window a prefix
+# bindsym $mod+p title_format "Important | %title"
+
+for_window [class="chromium"] layout tabbed
+for_window [class="iceweasel"] layout tabbed
+
+# 自动更换壁纸
+exec --no-startup-id feh --bg-tile -z /home/ubuntu/Wallpaper/
